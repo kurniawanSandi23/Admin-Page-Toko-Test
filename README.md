@@ -15,7 +15,3 @@ Aplikasi admin page untuk mengelola pembelian toko menggunakan Node.js, Express.
 3. Konfigurasi koneksi MySQL di `app.js` (ganti `user` dan `password` sesuai kredensial Anda).
 4. Jalankan server dengan perintah: `node app.js`.
 5. Buka browser dan akses `http://localhost:3000`.
-
-## Ketentuan
-- Durasi pengerjaan: 24 jam sejak arahan pretest dikirim via email.
-- Link repositori: [https://github.com/username/admin-page-toko-test](https://github.com/username/admin-page-toko-test)
