@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page - Toko</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Page - Toko Online</h1>
+    </header>
+    <div class="container">
+        <section class="product-list">
+            <h2>Daftar Produk</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Produk</th>
+                        <th>Nama Produk</th>
+                        <th>Harga</th>
+                        <th>Stok</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% produk.forEach(p => { %>
+                        <tr>
+                            <td><%= p.id_produk %></td>
+                            <td><%= p.nama_produk %></td>
+                            <td>Rp <%= p.harga.toLocaleString('id-ID') %></td>
+                            <td><%= stok[p.id_produk - 1].jumlah_stok %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="purchase-input">
+            <h2>Input Pembelian</h2>
+            <form action="/pembelian" method="POST">
+                <div class="form-group">
+                    <label for="id_produk">Pilih Produk:</label>
+                    <select name="id_produk" id="id_produk" class="form-control">
+                        <% produk.forEach(p => { %>
+                            <option value="<%= p.id_produk %>"><%= p.nama_produk %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="jumlah">Jumlah:</label>
+                    <input type="number" name="jumlah" id="jumlah" class="form-control" min="1" required>
+                </div>
+                <button type="submit" class="btn">Tambah Pembelian</button>
+            </form>
+        </section>
+
+        <section class="purchase-list">
+            <h2>Daftar Pembelian</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Pembelian</th>
+                        <th>ID Produk</th>
+                        <th>Jumlah</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% pembelian.forEach(p => { %>
+                        <tr>
+                            <td><%= p.id_pembelian %></td>
+                            <td><%= p.id_produk %></td>
+                            <td><%= p.jumlah %></td>
+                            <td><%= new Date(p.tanggal).toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }) %></td>
+                            <td><%= p.status %></td>
+                            <td><a href="/cancel/<%= p.id_pembelian %>" class="btn btn-danger">Cancel</a></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+</html>
